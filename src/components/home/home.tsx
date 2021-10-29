@@ -1,33 +1,37 @@
-import { useEffect } from 'react';
-import useTranslation from 'next-translate/useTranslation';
 import confetti from 'canvas-confetti';
-import useRequest from '../../hooks/useRequest';
+import useTranslation from 'next-translate/useTranslation';
+import { useEffect } from 'react';
 
-const Home = () => {
+import { Component } from '@/components/global/component';
+import useRequest from '@/hooks/useRequest';
+import { HolidaysData } from '@/types/holidays';
+
+const particleOptions = {
+  particleCount: 250,
+  spread: 100,
+  colors: ['#FCD116', '#003893', '#CE1126'],
+  disableForReducedMotion: true,
+};
+
+export const Home: Component = () => {
   const { t, lang } = useTranslation('home');
-  const { data, loading } = useRequest(`/api/holidays?lang=${lang}`);
-
-  console.log({
-    data,
-    loading,
-  });
+  const { data, loading } = useRequest<HolidaysData>(
+    `/api/holidays?lang=${lang}`,
+  );
 
   useEffect(() => {
     if (data && data.isHolidayToday) {
-      confetti({
-        particleCount: 250,
-        spread: 100,
-        colors: ['#FCD116', '#003893', '#CE1126'],
-        disableForReducedMotion: true,
-      });
+      confetti(particleOptions);
     }
     return () => {
-      confetti.reset();
+      try {
+        confetti.reset();
+      } catch (e) {}
     };
   }, [data]);
 
   const renderHolidayData = () => {
-    if (loading) return <p>{t('common:loading')}...</p>;
+    if (loading || !data) return <p>{t('common:loading')}...</p>;
     if (!data.isHolidayToday) {
       return (
         <>
@@ -62,5 +66,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;
