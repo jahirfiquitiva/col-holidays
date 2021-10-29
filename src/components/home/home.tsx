@@ -1,5 +1,6 @@
 import confetti from 'canvas-confetti';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
 import { useEffect } from 'react';
 
 import { Component } from '@/components/global/component';
@@ -61,7 +62,15 @@ export const Home: Component = () => {
 
   return (
     <>
+      <Image
+        src={'/static/icons/icon-192x192.png'}
+        width={144}
+        height={144}
+        alt={'Colombian Holidays app icon'}
+      />
+      <br />
       <h1>{t('its-holiday')}</h1>
+      <br />
       {renderHolidayData()}
     </>
   );
