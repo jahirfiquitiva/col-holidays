@@ -1,0 +1,7 @@
+{
+  "its-holiday": "It's a holiday in Colombia?",
+  "not-today": "Not today!",
+  "yes-it-is": "Yes, it is!",
+  "next-holiday": "Upcoming holiday is on {{holidayDate}} and it's for \"{{holidayName}}\"",
+  "today-holiday": "It's for \"{{holidayName}}\""
+}
