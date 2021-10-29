@@ -1,5 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
 
-module.exports = nextTranslate({
-  reactStrictMode: true,
-});
+module.exports = withPWA(
+  nextTranslate({
+    reactStrictMode: true,
+    pwa: {
+      dest: 'public',
+      register: true,
+      skipWaiting: true,
+      disable: process.env.NODE_ENV === 'development',
+    },
+  }),
+);
