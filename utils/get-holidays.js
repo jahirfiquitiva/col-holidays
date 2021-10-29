@@ -9,6 +9,7 @@ export const getColombianHolidays = (language = 'es-CO') => {
   const now = getDateInColombia();
   const mappedHolidays = colombianHolidays().map((holiday) => {
     const holidayDate = getDateInColombia(holiday.holiday);
+    holidayDate.setTime(holidayDate.getTime() - 5 * 3600 * 1000);
     const readableDate = holidayDate.toLocaleString(language, {
       timeZone: 'America/Bogota',
       weekday: 'long',
@@ -16,7 +17,6 @@ export const getColombianHolidays = (language = 'es-CO') => {
       month: 'long',
       day: 'numeric',
     });
-    holidayDate.setTime(holidayDate.getTime() - 5 * 3600 * 1000);
     return {
       readableDate,
       date: holiday.holiday,
