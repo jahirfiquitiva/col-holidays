@@ -1,7 +1,8 @@
 import Head from 'next/head';
+import { getColombianHolidays } from '../utils/get-holidays';
 import Layout from './../components/global/layout';
 
-export default function Home() {
+export default function Home(props) {
   return (
     <>
       <Head>
@@ -16,4 +17,12 @@ export default function Home() {
       </Layout>
     </>
   );
+}
+
+export function getServerSideProps() {
+  return {
+    props: {
+      holidaysData: getColombianHolidays(),
+    },
+  };
 }
