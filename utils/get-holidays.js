@@ -7,7 +7,6 @@ const getDateInColombia = (date) => {
 
 export const getColombianHolidays = (language = 'es-CO') => {
   const now = getDateInColombia();
-  console.log(`now: ${now.toISOString()}`);
   const mappedHolidays = colombianHolidays().map((holiday) => {
     const holidayDate = getDateInColombia(holiday.holiday);
     const readableDate = holidayDate.toLocaleString(language, {
