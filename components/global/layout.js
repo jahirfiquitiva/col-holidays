@@ -23,7 +23,7 @@ const Layout = (props) => {
             <Trans
               i18nKey='common:created'
               components={[
-                <a href='https://jahir.dev' rel={'noopener noreferrer'} target={'_blank'} />,
+                <a key="jahir-link" href='https://jahir.dev' rel={'noopener noreferrer'} target={'_blank'} />,
               ]}
             />
           </p>
@@ -31,8 +31,8 @@ const Layout = (props) => {
             <Trans
               i18nKey='common:inspired'
               components={[
-                <a href='https://srhart.co/' rel={'noopener noreferrer'} target={'_blank'} />,
-                <a href='https://esfestivo.co/' rel={'noopener noreferrer'} target={'_blank'} />,
+                <a key="srhart-link" href='https://srhart.co/' rel={'noopener noreferrer'} target={'_blank'} />,
+                <a key="esfestivo-link" href='https://esfestivo.co/' rel={'noopener noreferrer'} target={'_blank'} />,
               ]}
             />
           </p>
