@@ -3,6 +3,7 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common", "not-found"],
-    "/": ["home", "holidays"]
+    "/": ["home", "holidays"],
+    "/all": ["list"]
   }
 }

@@ -24,9 +24,11 @@ export const List: Component = () => {
   );
   return (
     <>
-      <h1>Holidays in {currentYear}</h1>
+      <h1>{t('list:holidays-in', { year: currentYear })}</h1>
       <div>
-        <label htmlFor={'year-select'}>Select a year:</label>
+        <label htmlFor={'year-select'}>
+          {t('list:select-year')}:&nbsp;&nbsp;
+        </label>
         <select
           defaultValue={'2021'}
           name={'year-select'}
@@ -50,8 +52,8 @@ export const List: Component = () => {
         <table style={{ width: '100%' }}>
           <thead>
             <tr>
-              <th>Holiday</th>
-              <th>Date</th>
+              <th>{t('list:holiday')}</th>
+              <th>{t('list:date')}</th>
             </tr>
           </thead>
 
