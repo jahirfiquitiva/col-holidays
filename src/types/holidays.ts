@@ -1,4 +1,5 @@
 export interface HolidayItem {
+  index?: number;
   date: string;
   readableDate: string;
   name: string;

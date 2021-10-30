@@ -20,12 +20,13 @@ export const getColombianHolidays = (
   const now = new Date();
   const mappedHolidays: Array<HolidayItem> = colombianHolidays(
     year || now.getFullYear(),
-  ).map((holiday) => {
+  ).map((holiday, index) => {
     const holidayDate = new Date(
       // @ts-ignore
       `${holiday.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
     );
     return {
+      index,
       readableDate: formatDate(holidayDate, language),
       // @ts-ignore
       date: holiday.holiday,
