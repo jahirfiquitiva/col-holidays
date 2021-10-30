@@ -73,7 +73,7 @@ export const Home: Component = () => {
   };
 
   return (
-    <>
+    <div style={{ textAlign: 'center' }}>
       <Image
         src={'/static/icons/icon-192x192.png'}
         width={144}
@@ -84,6 +84,6 @@ export const Home: Component = () => {
       <h1>{t('its-holiday')}</h1>
       <br />
       {renderHolidayData()}
-    </>
+    </div>
   );
 };
