@@ -39,19 +39,21 @@ export const Home: Component = () => {
         <>
           <h4>{t('not-today')}</h4>
           <br />
-          <p>
-            <Trans
-              i18nKey={'home:next-holiday'}
-              components={[
-                <b key={'holiday-date'} />,
-                <b key={'holiday-name'} />,
-              ]}
-              values={{
-                holidayDate: data.nextHoliday.readableDate,
-                holidayName: t(`holidays:${data.nextHoliday.index}`),
-              }}
-            />
-          </p>
+          {data.nextHoliday && (
+            <p>
+              <Trans
+                i18nKey={'home:next-holiday'}
+                components={[
+                  <b key={'holiday-date'} />,
+                  <b key={'holiday-name'} />,
+                ]}
+                values={{
+                  holidayDate: data.nextHoliday.readableDate,
+                  holidayName: t(`holidays:${data.nextHoliday.index}`),
+                }}
+              />
+            </p>
+          )}
         </>
       );
     }
@@ -59,15 +61,17 @@ export const Home: Component = () => {
       <>
         <h4>{t('yes-it-is')}</h4>
         <br />
-        <p>
-          <Trans
-            i18nKey={'home:today-holiday'}
-            components={[<b key={'holiday-name'} />]}
-            values={{
-              holidayName: t(`holidays:${data.nextHoliday.index}`),
-            }}
-          />
-        </p>
+        {data.nextHoliday && (
+          <p>
+            <Trans
+              i18nKey={'home:today-holiday'}
+              components={[<b key={'holiday-name'} />]}
+              values={{
+                holidayName: t(`holidays:${data.nextHoliday.index}`),
+              }}
+            />
+          </p>
+        )}
       </>
     );
   };
