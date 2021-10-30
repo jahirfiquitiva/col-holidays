@@ -2,6 +2,6 @@
   "its-holiday": "¿Es festivo en Colombia?",
   "not-today": "Hoy no!",
   "yes-it-is": "Si lo es!",
-  "next-holiday": "El próximo festivo es el {{holidayDate}} y se celebra \"{{holidayName}}\"",
-  "today-holiday": "Hoy se celebra \"{{holidayName}}\""
+  "next-holiday": "El próximo festivo es el <0>{{holidayDate}}</0> y se celebra <1>{{holidayName}}</1>",
+  "today-holiday": "Hoy se celebra <0>{{holidayName}}</0>"
 }

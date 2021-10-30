@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import colombianHolidays from 'colombia-holiday';
 
+import englishNames from './../../locales/en/holidays.json';
+import spanishNames from './../../locales/es/holidays.json';
+
 import { HolidaysData, HolidayItem } from '@/types/holidays';
 
 const formatDate = (date: Date, language: string = 'es-CO') => {
@@ -13,6 +16,22 @@ const formatDate = (date: Date, language: string = 'es-CO') => {
   });
 };
 
+const getHolidayNameForLanguage = (
+  index: number,
+  lang?: string,
+  defaultName?: string,
+): string | null | undefined => {
+  if (!lang) return defaultName;
+  let holidayName: string | null = null;
+  try {
+    // @ts-ignore
+    if (lang.includes('en')) holidayName = englishNames[`${index}`];
+    // @ts-ignore
+    else if (lang.includes('es')) holidayName = spanishNames[`${index}`];
+  } catch (e) {}
+  return holidayName || defaultName;
+};
+
 export const getColombianHolidays = (
   language: string = 'es-CO',
   year?: number,
@@ -20,17 +39,21 @@ export const getColombianHolidays = (
   const now = new Date();
   const mappedHolidays: Array<HolidayItem> = colombianHolidays(
     year || now.getFullYear(),
-  ).map((holiday) => {
+  ).map((holiday, index) => {
     const holidayDate = new Date(
       // @ts-ignore
       `${holiday.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
     );
     return {
+      index,
       readableDate: formatDate(holidayDate, language),
       // @ts-ignore
       date: holiday.holiday,
-      // @ts-ignore
-      name: holiday.holidayName,
+      name:
+        // @ts-ignore
+        getHolidayNameForLanguage(index, language, holiday.holidayName) ||
+        // @ts-ignore
+        holiday.holidayName,
       diff: now.getTime() - holidayDate.getTime(),
     };
   });

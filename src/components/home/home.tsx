@@ -1,4 +1,5 @@
 import confetti from 'canvas-confetti';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useEffect } from 'react';
@@ -39,10 +40,17 @@ export const Home: Component = () => {
           <h4>{t('not-today')}</h4>
           <br />
           <p>
-            {t('next-holiday', {
-              holidayDate: data.nextHoliday.readableDate,
-              holidayName: data.nextHoliday.name,
-            })}
+            <Trans
+              i18nKey={'home:next-holiday'}
+              components={[
+                <b key={'holiday-date'} />,
+                <b key={'holiday-name'} />,
+              ]}
+              values={{
+                holidayDate: data.nextHoliday.readableDate,
+                holidayName: t(`holidays:${data.nextHoliday.index}`),
+              }}
+            />
           </p>
         </>
       );
@@ -52,9 +60,13 @@ export const Home: Component = () => {
         <h4>{t('yes-it-is')}</h4>
         <br />
         <p>
-          {t('today-holiday', {
-            holidayName: data.nextHoliday.name,
-          })}
+          <Trans
+            i18nKey={'home:today-holiday'}
+            components={[<b key={'holiday-name'} />]}
+            values={{
+              holidayName: t(`holidays:${data.nextHoliday.index}`),
+            }}
+          />
         </p>
       </>
     );
