@@ -107,9 +107,9 @@ export const Meta: Component<MetaProps> = (props) => {
         href={'/static/favicon/favicon-16x16.png'}
       />
       <link rel={'manifest'} href={'/manifest.json'} />
-      <meta name={'msapplication-TileColor'} content={'#ffffff'} />
+      <meta name={'msapplication-TileColor'} content={'#000000'} />
       <meta name={'msapplication-TileImage'} content={'/ms-icon-144x144.png'} />
-      <meta name={'theme-color'} content={'#ffffff'}></meta>
+      <meta name={'theme-color'} content={'#000000'}></meta>
     </Head>
   );
 };
