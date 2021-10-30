@@ -25,7 +25,7 @@ export const Meta: Component<MetaProps> = (props) => {
       <meta property={'og:description'} content={description} />
       <meta
         property={'og:image'}
-        content={'https://col-holidays.co/static/icons/icon-512x512.png'}
+        content={'https://col-holidays.co/static/banner.png'}
       />
 
       <meta property={'twitter:card'} content={'summary_large_image'} />
