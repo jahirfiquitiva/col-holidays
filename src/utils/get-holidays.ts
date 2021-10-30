@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import colombianHolidays from 'colombia-holiday';
 
-import englishNames from './../../locales/en/holidays';
-import spanishNames from './../../locales/es/holidays';
+import englishNames from './../../locales/en/holidays.json';
+import spanishNames from './../../locales/es/holidays.json';
 
 import { HolidaysData, HolidayItem } from '@/types/holidays';
 
@@ -17,14 +17,16 @@ const formatDate = (date: Date, language: string = 'es-CO') => {
 };
 
 const getHolidayNameForLanguage = (
+  index: number,
   lang?: string,
-  index?: number,
   defaultName?: string,
 ): string | null | undefined => {
   if (!lang) return defaultName;
-  let holidayName = null;
+  let holidayName: string | null = null;
   try {
+    // @ts-ignore
     if (lang.includes('en')) holidayName = englishNames[`${index}`];
+    // @ts-ignore
     else if (lang.includes('es')) holidayName = spanishNames[`${index}`];
   } catch (e) {}
   return holidayName || defaultName;
@@ -49,7 +51,7 @@ export const getColombianHolidays = (
       date: holiday.holiday,
       name:
         // @ts-ignore
-        getHolidayNameForLanguage(language, index, holiday.holidayName) ||
+        getHolidayNameForLanguage(index, language, holiday.holidayName) ||
         // @ts-ignore
         holiday.holidayName,
       diff: now.getTime() - holidayDate.getTime(),
