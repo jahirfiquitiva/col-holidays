@@ -58,12 +58,14 @@ export const getColombianHolidays = (
     };
   });
 
-  const [nextHoliday] = mappedHolidays.filter((it) => (it.diff || 1) <= 0);
+  const [nextHoliday] = mappedHolidays
+    .filter((it) => it)
+    .filter((it) => (it?.diff || 1) <= 0);
 
   return {
     count: mappedHolidays.length,
     holidays: mappedHolidays.map((it) => ({ ...it, diff: undefined })),
-    nextHoliday: { ...nextHoliday, diff: undefined },
-    isHolidayToday: nextHoliday.diff === 0,
+    nextHoliday: nextHoliday ? { ...nextHoliday, diff: undefined } : null,
+    isHolidayToday: nextHoliday?.diff === 0,
   };
 };

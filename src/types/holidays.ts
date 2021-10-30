@@ -9,6 +9,6 @@ export interface HolidayItem {
 export interface HolidaysData {
   count: number;
   holidays: Array<HolidayItem>;
-  nextHoliday: HolidayItem;
+  nextHoliday?: HolidayItem | null;
   isHolidayToday?: boolean;
 }
