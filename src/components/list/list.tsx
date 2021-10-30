@@ -47,7 +47,7 @@ export const List: Component = () => {
         </select>
       </div>
       <br />
-      {loading && <p>{t('loading')}</p>}
+      {loading && <p>{t('loading')}...</p>}
       {!loading && data && (
         <table style={{ width: '100%' }}>
           <thead>
