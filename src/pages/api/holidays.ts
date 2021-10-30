@@ -15,7 +15,12 @@ const handler = async (
   try {
     return res
       .status(200)
-      .json(getColombianHolidays(actualLang || 'es-CO', actualYear || 2021));
+      .json(
+        getColombianHolidays(
+          actualLang || 'es-CO',
+          actualYear || new Date().getFullYear(),
+        ),
+      );
   } catch (e: unknown) {
     return res.status(500).json({
       // @ts-ignore
