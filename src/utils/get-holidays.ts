@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import colombianHolidays from 'colombia-holiday';
 
+import englishNames from './../../locales/en/holidays';
+import spanishNames from './../../locales/es/holidays';
+
 import { HolidaysData, HolidayItem } from '@/types/holidays';
 
 const formatDate = (date: Date, language: string = 'es-CO') => {
@@ -11,6 +14,20 @@ const formatDate = (date: Date, language: string = 'es-CO') => {
     month: 'long',
     day: 'numeric',
   });
+};
+
+const getHolidayNameForLanguage = (
+  lang?: string,
+  index?: number,
+  defaultName?: string,
+): string | null | undefined => {
+  if (!lang) return defaultName;
+  let holidayName = null;
+  try {
+    if (lang.includes('en')) holidayName = englishNames[`${index}`];
+    else if (lang.includes('es')) holidayName = spanishNames[`${index}`];
+  } catch (e) {}
+  return holidayName || defaultName;
 };
 
 export const getColombianHolidays = (
@@ -30,8 +47,11 @@ export const getColombianHolidays = (
       readableDate: formatDate(holidayDate, language),
       // @ts-ignore
       date: holiday.holiday,
-      // @ts-ignore
-      name: holiday.holidayName,
+      name:
+        // @ts-ignore
+        getHolidayNameForLanguage(language, index, holiday.holidayName) ||
+        // @ts-ignore
+        holiday.holidayName,
       diff: now.getTime() - holidayDate.getTime(),
     };
   });
