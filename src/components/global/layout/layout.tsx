@@ -5,12 +5,15 @@ import Link from 'next/link';
 import styles from './layout.module.css';
 
 import { Component, ComponentProps } from '@/components/global/component';
+import { Meta } from '@/components/global/meta';
 
 export const Layout: Component = (props: ComponentProps) => {
   const { t } = useTranslation('common');
 
   return (
     <div className={styles.container}>
+      <Meta />
+
       <header>
         <nav>
           <Link href={'/'}>{t('home')}</Link>
