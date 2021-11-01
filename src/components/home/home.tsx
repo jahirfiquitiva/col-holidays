@@ -10,7 +10,7 @@ import { HolidaysData } from '@/types/holidays';
 
 const particleOptions = {
   particleCount: 250,
-  spread: 100,
+  spread: 150,
   colors: ['#FCD116', '#003893', '#CE1126'],
   disableForReducedMotion: true,
 };
