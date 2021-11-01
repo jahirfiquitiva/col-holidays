@@ -86,7 +86,7 @@ export const Home: Component = () => {
       <img
         className={'photo'}
         alt={'random photo from Colombia'}
-        src={'https://source.unsplash.com/collection/9653593?orientation=landscape'}
+        src={'https://source.unsplash.com/collection/8308296?orientation=landscape'}
         decoding={'async'}
         loading={'lazy'}
       />
