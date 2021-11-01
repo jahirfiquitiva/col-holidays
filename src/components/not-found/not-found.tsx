@@ -2,8 +2,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 
-import styles from './not-found.module.css';
-
 import { Component } from '@/components/global/component';
 
 export const NotFound: Component = () => {
@@ -21,9 +19,9 @@ export const NotFound: Component = () => {
       </Link>
       <br />
       <img
-        className={styles.photo}
+        className={'photo'}
         alt={'random photo from Colombia'}
-        src={'https://source.unsplash.com/collection/9653593'}
+        src={'https://source.unsplash.com/collection/9653593?orientation=landscape'}
         decoding={'async'}
         loading={'lazy'}
       />
