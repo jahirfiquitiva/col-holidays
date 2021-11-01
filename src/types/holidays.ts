@@ -3,7 +3,8 @@ export interface HolidayItem {
   date: string;
   readableDate: string;
   name: string;
-  diff?: number;
+  timeDifference?: number;
+  itsToday?: boolean;
 }
 
 export interface HolidaysData {
@@ -11,4 +12,5 @@ export interface HolidaysData {
   holidays: Array<HolidayItem>;
   nextHoliday?: HolidayItem | null;
   isHolidayToday?: boolean;
+  now?: string;
 }
