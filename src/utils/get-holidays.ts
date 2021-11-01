@@ -6,6 +6,13 @@ import spanishNames from './../../locales/es/holidays.json';
 
 import { HolidaysData, HolidayItem } from '@/types/holidays';
 
+const hoursInADay = 24;
+const minutesInAnHour = 60;
+const secondsInAMinute = 60;
+const millisInASecond = 1000;
+const millisInADay =
+  hoursInADay * minutesInAnHour * secondsInAMinute * millisInASecond;
+
 const formatDate = (date: Date, language: string = 'es-CO') => {
   return date.toLocaleString(language, {
     timeZone: 'America/Bogota',
@@ -32,18 +39,39 @@ const getHolidayNameForLanguage = (
   return holidayName || defaultName;
 };
 
+const getIfDateIsToday = (timeInMillis?: number): boolean => {
+  if (typeof timeInMillis === 'undefined') return false;
+  const isInTheFuture = (timeInMillis || -1) < 0;
+  if (isInTheFuture) return false;
+  const isWithinToday = (timeInMillis || -1) <= millisInADay;
+  return isWithinToday && timeInMillis >= 0;
+};
+
 export const getColombianHolidays = (
   language: string = 'es-CO',
   year?: number,
 ): HolidaysData => {
   const now = new Date();
-  const mappedHolidays: Array<HolidayItem> = colombianHolidays(
-    year || now.getFullYear(),
-  ).map((holiday, index) => {
+
+  const colHoli = colombianHolidays(year || now.getFullYear());
+  colHoli.sort((a, b) => {
+    const holidayDateA = new Date(
+      // @ts-ignore
+      `${a.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
+    );
+    const holidayDateB = new Date(
+      // @ts-ignore
+      `${b.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
+    );
+    return holidayDateA.getTime() - holidayDateB.getTime();
+  });
+
+  const mappedHolidays: Array<HolidayItem> = colHoli.map((holiday, index) => {
     const holidayDate = new Date(
       // @ts-ignore
       `${holiday.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
     );
+    const timeDifference = now.getTime() - holidayDate.getTime();
     return {
       index,
       readableDate: formatDate(holidayDate, language),
@@ -54,18 +82,27 @@ export const getColombianHolidays = (
         getHolidayNameForLanguage(index, language, holiday.holidayName) ||
         // @ts-ignore
         holiday.holidayName,
-      diff: now.getTime() - holidayDate.getTime(),
+      timeDifference,
+      itsToday: getIfDateIsToday(timeDifference),
     };
   });
 
-  const [nextHoliday] = mappedHolidays
-    .filter((it) => it)
-    .filter((it) => (it?.diff || 1) <= 0);
+  const [nextHoliday] = mappedHolidays.filter((it) => {
+    return (
+      typeof it !== 'undefined' && (it.itsToday || (it.timeDifference || 0) < 0)
+    );
+  });
 
   return {
     count: mappedHolidays.length,
-    holidays: mappedHolidays.map((it) => ({ ...it, diff: undefined })),
-    nextHoliday: nextHoliday ? { ...nextHoliday, diff: undefined } : null,
-    isHolidayToday: nextHoliday?.diff === 0,
+    holidays: mappedHolidays.map((it) => ({
+      ...it,
+      timeDifference: undefined,
+    })),
+    nextHoliday: nextHoliday
+      ? { ...nextHoliday, timeDifference: undefined }
+      : null,
+    isHolidayToday: nextHoliday?.itsToday,
+    now: now.toISOString(),
   };
 };
