@@ -78,16 +78,18 @@ export const Home: Component = () => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Image
-        src={'/static/icons/icon-192x192.png'}
-        width={144}
-        height={144}
-        alt={'Colombian Holidays app icon'}
-      />
-      <br />
       <h1>{t('its-holiday')}</h1>
       <br />
       {renderHolidayData()}
+      <br />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className={'photo'}
+        alt={'random photo from Colombia'}
+        src={'https://source.unsplash.com/collection/9653593?orientation=landscape'}
+        decoding={'async'}
+        loading={'lazy'}
+      />
     </div>
   );
 };

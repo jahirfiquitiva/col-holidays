@@ -1,5 +1,6 @@
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from './layout.module.css';
@@ -32,6 +33,12 @@ export const Layout: Component = (props: ComponentProps) => {
 
       <footer className={styles.footer}>
         <div className={styles.wrapper}>
+          <Image
+            src={'/static/favicon/android-icon-48x48.png'}
+            width={24}
+            height={24}
+            alt={'Colombian Holidays app icon'}
+          />
           <p>
             <Trans
               i18nKey={'common:created'}
