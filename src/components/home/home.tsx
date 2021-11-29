@@ -1,7 +1,6 @@
 import confetti from 'canvas-confetti';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
 import { useEffect } from 'react';
 
 import { Component } from '@/components/global/component';

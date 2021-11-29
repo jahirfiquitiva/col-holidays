@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import colombianHolidays from 'colombia-holiday';
-
-import englishNames from './../../locales/en/holidays.json';
-import spanishNames from './../../locales/es/holidays.json';
-
-import { HolidaysData, HolidayItem } from '@/types/holidays';
+import { HolidaysData, HolidayItem, DefaultHoliday } from '@/types/holidays';
 
 const hoursInADay = 24;
 const minutesInAnHour = 60;
@@ -24,19 +19,16 @@ const formatDate = (date: Date, language: string = 'es-CO') => {
 };
 
 const getHolidayNameForLanguage = (
-  index: number,
+  holiday: DefaultHoliday,
   lang?: string,
-  defaultName?: string,
-): string | null | undefined => {
-  if (!lang) return defaultName;
-  let holidayName: string | null = null;
+): string => {
+  const { holidayName } = holiday;
+  if (!lang) return holidayName;
   try {
     // @ts-ignore
-    if (lang.includes('en')) holidayName = englishNames[`${index}`];
-    // @ts-ignore
-    else if (lang.includes('es')) holidayName = spanishNames[`${index}`];
+    if (lang.includes('en')) return holiday.altName || holidayName;
   } catch (e) {}
-  return holidayName || defaultName;
+  return holidayName;
 };
 
 const getIfDateIsToday = (timeInMillis?: number): boolean => {
@@ -48,13 +40,12 @@ const getIfDateIsToday = (timeInMillis?: number): boolean => {
 };
 
 export const getColombianHolidays = (
+  holidaysList: Array<DefaultHoliday>,
   language: string = 'es-CO',
-  year?: number,
 ): HolidaysData => {
   const now = new Date();
 
-  const colHoli = colombianHolidays(year || now.getFullYear());
-  colHoli.sort((a, b) => {
+  holidaysList.sort((a, b) => {
     const holidayDateA = new Date(
       // @ts-ignore
       `${a.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
@@ -66,26 +57,24 @@ export const getColombianHolidays = (
     return holidayDateA.getTime() - holidayDateB.getTime();
   });
 
-  const mappedHolidays: Array<HolidayItem> = colHoli.map((holiday, index) => {
-    const holidayDate = new Date(
-      // @ts-ignore
-      `${holiday.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
-    );
-    const timeDifference = now.getTime() - holidayDate.getTime();
-    return {
-      index,
-      readableDate: formatDate(holidayDate, language),
-      // @ts-ignore
-      date: holiday.holiday,
-      name:
+  const mappedHolidays: Array<HolidayItem> = holidaysList.map(
+    (holiday, index) => {
+      const holidayDate = new Date(
         // @ts-ignore
-        getHolidayNameForLanguage(index, language, holiday.holidayName) ||
+        `${holiday.holiday.replace(/\//g, '-')}T00:00:00.000-05:00`,
+      );
+      const timeDifference = now.getTime() - holidayDate.getTime();
+      return {
+        index,
+        readableDate: formatDate(holidayDate, language),
         // @ts-ignore
-        holiday.holidayName,
-      timeDifference,
-      itsToday: getIfDateIsToday(timeDifference),
-    };
-  });
+        date: holiday.holiday,
+        name: getHolidayNameForLanguage(holiday, language),
+        timeDifference,
+        itsToday: getIfDateIsToday(timeDifference),
+      };
+    },
+  );
 
   const [nextHoliday] = mappedHolidays.filter((it) => {
     return (
