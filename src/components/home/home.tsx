@@ -48,7 +48,7 @@ export const Home: Component = () => {
                 ]}
                 values={{
                   holidayDate: data.nextHoliday.readableDate,
-                  holidayName: t(`holidays:${data.nextHoliday.index}`),
+                  holidayName: data.nextHoliday.name,
                 }}
               />
             </p>
