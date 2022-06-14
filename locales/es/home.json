@@ -3,5 +3,7 @@
   "not-today": "Hoy no!",
   "yes-it-is": "Si lo es!",
   "next-holiday": "El próximo festivo es el <0>{{holidayDate}}</0> y se celebra <1>{{holidayName}}</1>",
-  "today-holiday": "Hoy se celebra <0>{{holidayName}}</0>"
+  "today-holiday": "Hoy se celebra <0>{{holidayName}}</0>",
+  "photo-alt": "Foto aleatoria de {{country}}",
+  "source": "Fuente"
 }

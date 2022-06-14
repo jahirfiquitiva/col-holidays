@@ -13,7 +13,7 @@ const handler = async (
   const actualYear = parseInt(Array.isArray(year) ? year[0] : year);
 
   const request = await fetch(
-    `https://worldwide-holidays.vercel.app/api/holidays?country=CO&year=${
+    `https://api.world-holidays.info/holidays?country=CO&year=${
       actualYear || new Date().getFullYear()
     }`,
   );

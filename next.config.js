@@ -12,7 +12,7 @@ module.exports = withPWA(
       disable: process.env.NODE_ENV === 'development',
     },
     images: {
-      domains: ['source.unsplash.com'],
+      domains: ['source.unsplash.com','images.unsplash.com'],
     },
   }),
 );

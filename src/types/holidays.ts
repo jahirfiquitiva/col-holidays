@@ -22,3 +22,15 @@ export interface HolidaysData {
   isHolidayToday?: boolean;
   now?: string;
 }
+
+export interface PhotoData {
+  width: number;
+  height: number;
+  color: string;
+  blur_hash: string;
+  description: string;
+  alt_description: string;
+  url: string;
+  link: string;
+}
+

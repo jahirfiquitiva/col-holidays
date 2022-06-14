@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import confetti from 'canvas-confetti';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -5,19 +6,28 @@ import { useEffect } from 'react';
 
 import { Component } from '@/components/global/component';
 import useRequest from '@/hooks/useRequest';
-import { HolidaysData } from '@/types/holidays';
+import { HolidaysData, PhotoData } from '@/types/holidays';
 
 const particleOptions = {
   particleCount: 250,
   spread: 150,
   colors: ['#FCD116', '#003893', '#CE1126'],
   disableForReducedMotion: true,
+  useWorker: true,
 };
 
 export const Home: Component = () => {
   const { t, lang } = useTranslation('home');
   const { data, loading } = useRequest<HolidaysData>(
     `/api/holidays?lang=${lang}`,
+  );
+  const { data: photoData, loading: photoLoading } = useRequest<PhotoData>(
+    `/api/photo?country=Colombia`,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      refreshInterval: 4320000,
+    },
   );
 
   useEffect(() => {
@@ -75,20 +85,52 @@ export const Home: Component = () => {
     );
   };
 
+  const renderCountryImage = () => {
+    if (loading || photoLoading || !photoData || !photoData.url) return null;
+    const photoDescription =
+      photoData?.description || t('photo-alt', { country: 'Colombia' });
+    return (
+      <figure>
+        <Image
+          src={photoData?.url || ''}
+          alt={photoData?.alt_description || photoDescription}
+          layout={'responsive'}
+          width={photoData?.width || 1080}
+          height={photoData?.height || 608}
+          placeholder={'blur'}
+          blurDataURL={photoData?.blur_hash || ''}
+          loading={'lazy'}
+          decoding={'async'}
+          style={{ backgroundColor: photoData?.color || 'rgba(0,0,0,0)' }}
+        />
+        <figcaption style={{ textAlign: 'center' }}>
+          <small>
+            <em>
+              {photoDescription}
+              {'. '}
+              {t('source')}
+              {': '}
+              <a
+                href={photoData?.link}
+                target={'_blank'}
+                rel={'noopener noreferrer'}
+              >
+                Unsplash
+              </a>
+            </em>
+          </small>
+        </figcaption>
+      </figure>
+    );
+  };
+
   return (
     <div style={{ textAlign: 'center' }}>
       <h1>{t('its-holiday')}</h1>
       <br />
       {renderHolidayData()}
       <br />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        className={'photo'}
-        alt={'random photo from Colombia'}
-        src={'https://source.unsplash.com/collection/8308296?orientation=landscape'}
-        decoding={'async'}
-        loading={'lazy'}
-      />
+      {renderCountryImage()}
     </div>
   );
 };
