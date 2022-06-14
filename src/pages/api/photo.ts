@@ -22,16 +22,16 @@ interface UnsplashPhoto {
   };
 }
 
-// const defaultPhoto: PhotoData = {
-//   width: photo.width,
-//   height: photo.height,
-//   color: photo.color,
-//   blur_hash: photo.blur_hash,
-//   url: photo.urls.regular,
-//   description: photo.location?.title || '',
-//   alt_description: photo.alt_description,
-//   link: photo.links.html || '',
-// };
+const defaultPhoto: PhotoData = {
+  width: 6000,
+  height: 3376,
+  color: '#1789b4',
+  blur_hash: 'LWHo2pVYDNWo-pbvIpivXTR*RPRk',
+  url: 'https://images.unsplash.com/photo-1533699224246-6dc3b3ed3304?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMzgwMjJ8MHwxfGFsbHx8fHx8fHx8fDE2NTUyNTA2NTc&ixlib=rb-1.2.1&q=80&w=1080',
+  description: 'Bogotá, Colombia',
+  alt_description: 'yellow, blue, and red flag',
+  link: 'https://unsplash.com/photos/P3PFi8THbUs',
+};
 
 const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
 const searchResults = 10;
@@ -57,7 +57,8 @@ const handler = async (
   const { status } = request;
   if (status < 200 || status >= 400) {
     const responseText = await request.text();
-    return res.status(status).json({
+    return res.status(200).json({
+      ...defaultPhoto,
       // @ts-ignore
       error: responseText || 'Unsplash API error. Probably rate limit',
     });
