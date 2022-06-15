@@ -103,13 +103,20 @@ export const Home: Component = () => {
           decoding={'async'}
           style={{ backgroundColor: photoData?.color || 'rgba(0,0,0,0)' }}
         />
-        <figcaption style={{ textAlign: 'center' }}>
+        <figcaption style={{ textAlign: 'center', marginTop: '0.8rem' }}>
           <small>
             <em>
               {photoDescription}
-              {'. '}
-              {t('source')}
-              {': '}
+              <br />
+              {t('source')}{' '}
+              <a
+                href={photoData?.author?.link || 'https://unsplash.com/'}
+                target={'_blank'}
+                rel={'noopener noreferrer'}
+              >
+                {photoData?.author?.name || 'Unknown'}
+              </a>
+              {' on '}
               <a
                 href={photoData?.link}
                 target={'_blank'}

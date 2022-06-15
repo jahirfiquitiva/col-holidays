@@ -20,6 +20,12 @@ interface UnsplashPhoto {
     title?: string;
     country?: string;
   };
+  user?: {
+    name?: string;
+    links?: {
+      html?: string;
+    };
+  };
 }
 
 const defaultPhoto: PhotoData = {
@@ -31,6 +37,10 @@ const defaultPhoto: PhotoData = {
   description: 'Bogotá, Colombia',
   alt_description: 'yellow, blue, and red flag',
   link: 'https://unsplash.com/photos/P3PFi8THbUs',
+  author: {
+    name: 'Flavia Carpio',
+    link: 'https://unsplash.com/@flacaral',
+  },
 };
 
 const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
@@ -87,6 +97,10 @@ const handler = async (
       description: photo.location?.title || '',
       alt_description: photo.alt_description,
       link: photo.links.html || '',
+      author: {
+        name: photo.user?.name || 'Unknown',
+        link: photo.user?.links?.html || 'https://unsplash.com/',
+      },
     };
     res.setHeader(
       'Cache-Control',
