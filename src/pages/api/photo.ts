@@ -50,6 +50,15 @@ const requestHeaders = new Headers();
 requestHeaders.append('Content-Type', 'application/json');
 requestHeaders.append('Authorization', `Client-ID ${unsplashAccessKey}`);
 
+const buildReferralLink = (
+  link: string | undefined | null,
+): string | undefined => {
+  if (!link) return undefined;
+  return `${link}?utm_source=${encodeURIComponent(
+    'colombian-holidays',
+  )}&utm_medium=referral`;
+};
+
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse,
@@ -96,10 +105,13 @@ const handler = async (
       url: photo.urls.regular,
       description: photo.location?.title || '',
       alt_description: photo.alt_description,
-      link: photo.links.html || '',
+      link: buildReferralLink(photo.links.html) || photo.urls.regular,
       author: {
         name: photo.user?.name || 'Unknown',
-        link: photo.user?.links?.html || 'https://unsplash.com/',
+        link:
+          buildReferralLink(
+            photo.user?.links?.html || 'https://unsplash.com/',
+          ) || '',
       },
     };
     res.setHeader(
