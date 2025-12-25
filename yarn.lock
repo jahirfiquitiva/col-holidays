@@ -3270,7 +3270,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import@npm:^2.26.0, eslint-plugin-import@npm:^2.32.0":
+"eslint-plugin-import@npm:^2.26.0":
   version: 2.32.0
   resolution: "eslint-plugin-import@npm:2.32.0"
   dependencies:
@@ -3379,7 +3379,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.31.7, eslint-plugin-react@npm:^7.37.5":
+"eslint-plugin-react@npm:^7.30.0, eslint-plugin-react@npm:^7.31.7":
   version: 7.37.5
   resolution: "eslint-plugin-react@npm:7.37.5"
   dependencies:
@@ -4065,11 +4065,11 @@ __metadata:
     eslint: "npm:^8.57.1"
     eslint-config-next: "npm:12.3.7"
     eslint-config-standard: "npm:^17.1.0"
-    eslint-plugin-import: "npm:^2.32.0"
+    eslint-plugin-import: "npm:^2.26.0"
     eslint-plugin-n: "npm:16.6.2"
     eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-promise: "npm:^6.6.0"
-    eslint-plugin-react: "npm:^7.37.5"
+    eslint-plugin-react: "npm:^7.30.0"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-standard: "npm:^5.0.0"
     next: "npm:12.3.7"
