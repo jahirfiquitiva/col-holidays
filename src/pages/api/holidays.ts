@@ -8,7 +8,7 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<NextApiFunc> => {
-  const { lang, year } = req.query;
+  const { lang, year = new Date().getFullYear().toString() } = req.query;
   const actualLang = Array.isArray(lang) ? lang[0] : lang;
   const actualYear = parseInt(Array.isArray(year) ? year[0] : year);
 
