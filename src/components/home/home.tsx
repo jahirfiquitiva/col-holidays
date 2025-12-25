@@ -76,7 +76,7 @@ export const Home: Component = () => {
               i18nKey={'home:today-holiday'}
               components={[<b key={'holiday-name'} />]}
               values={{
-                holidayName: t(`holidays:${data.nextHoliday.index}`),
+                holidayName: data.nextHoliday.name,
               }}
             />
           </p>
