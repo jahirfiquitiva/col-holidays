@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import confetti from 'canvas-confetti';
+import Image from 'next/image';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect } from 'react';
@@ -22,7 +22,7 @@ export const Home: Component = () => {
     `/api/holidays?lang=${lang}`,
   );
   const { data: photoData, loading: photoLoading } = useRequest<PhotoData>(
-    `/api/photo?country=Colombia`,
+    '/api/photo?country=Colombia',
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,

@@ -19,8 +19,9 @@ export const Meta: Component<MetaProps> = (props) => {
       <meta name={'title'} content={title} />
       <meta name={'description'} content={description} />
       <meta
-        name="keywords"
-        content="holidays, festivos, festivo, feriado, feriados, pais, worldwide, holiday, co, col, colombia, colombiano, colombiana, colombianx, colombianos, festivos colombianos, festivos en colombia"
+        name={'keywords'}
+        // eslint-disable-next-line max-len
+        content={'holidays, festivos, festivo, feriado, feriados, pais, worldwide, holiday, co, col, colombia, colombiano, colombiana, colombianx, colombianos, festivos colombianos, festivos en colombia'}
       />
 
       <meta property={'og:type'} content={'website'} />

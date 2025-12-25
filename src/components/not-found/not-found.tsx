@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 import { Component } from '@/components/global/component';
 

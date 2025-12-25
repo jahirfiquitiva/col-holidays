@@ -33,6 +33,7 @@
     "eslint-config-next": "12.3.7",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^17.23.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-react": "^7.37.5",

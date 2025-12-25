@@ -54,6 +54,7 @@ const buildReferralLink = (
   link: string | undefined | null,
 ): string | undefined => {
   if (!link) return undefined;
+  // eslint-disable-next-line consistent-return
   return `${link}?utm_source=${encodeURIComponent(
     'colombian-holidays',
   )}&utm_medium=referral`;
@@ -85,7 +86,7 @@ const handler = async (
 
   try {
     const response = await request.json();
-    const photo: UnsplashPhoto = (response || []).filter(
+    const [photo] = (response || []).filter(
       (it: UnsplashPhoto) => {
         return (
           (it.location?.country || '')
@@ -96,7 +97,7 @@ const handler = async (
             .includes((actualCountry || '').toLowerCase())
         );
       },
-    )[0];
+    ) as UnsplashPhoto[];
     const data: PhotoData = {
       width: photo.width,
       height: photo.height,
